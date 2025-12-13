@@ -1,5 +1,4 @@
-name: CI Pipeline Tianguistore
- 
+name: 🚀 Pipeline Tianguistore
 
 on: 
   push:
@@ -15,87 +14,83 @@ concurrency:
 
 jobs: 
   validation:
-    name: 🤣 Validar de sintaxis
+    name: 🔍 Revisión de sintaxis
     runs-on: ubuntu-latest
-    timeout-minutes: 10
 
     defaults:
       run:
         working-directory: backend
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+      - name: Obtener código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '22.0.0'
-        
-      - name: Instalar dependencies
+          node-version: 22 
+
+      - name: Instalar dependencias
         run: npm install --prefer-offline --no-audit
 
-      - name: Validar HTML
+      - name: Checar HTML
         run: npm run test:html
         id: html-check
 
-      - name: Validar JavaScript
-        run: npm correr test:js
+      - name: Checar JavaScript
+        run: npm run test:js
         id: js-check
 
-      - name: Summary - Validacion
+      - name: Resumen - Revisión
         if: always()
         run: |
-          echo "## 📋 Validación de Sintaxis" >> $GITHUB_STEP_SUMMARY
-          echo "- HTML: ${{ steps.html-check.outcome }}" >> $GITHUB_STEP_SUMMARY
-          echo "- JavaScript: ${{ steps.js-check.outcome }}" >> $GITHUB_STEP_SUMMARY
+          echo "## 🔍 Revisión de Sintaxis" >> $GITHUB_STEP_SUMMARY
+          echo "- HTML: ${{ steps['html-check'].outcome }}" >> $GITHUB_STEP_SUMMARY
+          echo "- JavaScript: ${{ steps['js-check'].outcome }}" >> $GITHUB_STEP_SUMMARY
 
   tests:
-    name: 🤣 Prueba del backend
+    name: 🧪 Pruebas backend
     runs-on: ubuntu-latest
     needs: validation
-    timeout-minutes: 15
-    if: success()
 
     defaults:
       run:
         working-directory: backend
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Obtener código
+        uses: actions/checkout@v4
         
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '22.0.0'
+          node-version: 22   
 
-      - name: Install dependencies
+      - name: Instalar dependencias
         run: npm install --prefer-offline --no-audit
 
-      - name: Run tests
+      - name: Ejecutar pruebas
         run: npm test || true
 
-      - name: Summary - Tests
+      - name: Resumen - Pruebas
         if: always()
         run: |
-          echo "## 🧪 Resultados de Tests" >> $GITHUB_STEP_SUMMARY
-          echo "- Status: OK" >> $GITHUB_STEP_SUMMARY
+          echo "## 🧪 Resultados de pruebas" >> $GITHUB_STEP_SUMMARY
+          echo "- Pruebas completadas" >> $GITHUB_STEP_SUMMARY
 
   summary:
-    name: 🤣 Resumen final
+    name: 🏁 Resumen final para AleRxjs
     runs-on: ubuntu-latest
     needs: [validation, tests]
     if: always()
-    
+
     steps:
-      - name: Build Success
+      - name: Pipeline exitoso
         if: success()
-        run: echo "🎉 Pipeline completado exitosamente"
-        
-      - name: Build Failed
+        run: echo "🏁 Pipeline finalizado correctamente"
+
+      - name: Pipeline con errores
         if: failure()
         run: |
-          echo "⚠️ Pipeline con errores"
+          echo "⚠️ Se detectaron errores en el pipeline"
           exit 1
-
