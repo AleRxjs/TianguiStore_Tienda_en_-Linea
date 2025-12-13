@@ -15,7 +15,7 @@ concurrency:
 
 jobs: 
   validation:
-    name: 🔍 Validación de sintaxis
+    name: 🤣 Validar de sintaxis
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -32,18 +32,18 @@ jobs:
         with:
           node-version: '22.0.0'
         
-      - name: Install dependencies
+      - name: Instalar dependencies
         run: npm install --prefer-offline --no-audit
 
-      - name: Validate HTML
+      - name: Validar HTML
         run: npm run test:html
         id: html-check
 
-      - name: Validate JavaScript
-        run: npm run test:js
+      - name: Validar JavaScript
+        run: npm correr test:js
         id: js-check
 
-      - name: Summary - Validation
+      - name: Summary - Validacion
         if: always()
         run: |
           echo "## 📋 Validación de Sintaxis" >> $GITHUB_STEP_SUMMARY
@@ -51,7 +51,7 @@ jobs:
           echo "- JavaScript: ${{ steps.js-check.outcome }}" >> $GITHUB_STEP_SUMMARY
 
   tests:
-    name: 🧪 Tests del backend
+    name: 🤣 Prueba del backend
     runs-on: ubuntu-latest
     needs: validation
     timeout-minutes: 15
@@ -83,7 +83,7 @@ jobs:
           echo "- Status: OK" >> $GITHUB_STEP_SUMMARY
 
   summary:
-    name: 📋 Resumen final
+    name: 🤣 Resumen final
     runs-on: ubuntu-latest
     needs: [validation, tests]
     if: always()
