@@ -14,6 +14,240 @@
 
   <!-- Estilos personalizados -->
   <link rel="stylesheet" href="estilo/main.css" />
+
+  <style>
+    /* 🎨 Fondo animado con gradiente dinámico */
+    body.dark {
+      background: linear-gradient(-45deg, #1a237e, #0d47a1, #00796b, #1b5e20);
+      background-size: 400% 400%;
+      animation: gradientFlow 15s ease infinite;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientFlow {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* 🌟 Partículas flotantes de fondo */
+    body.dark::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 60px 70px, #fff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 50px 50px, #fff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 90px 10px, #fff, rgba(0,0,0,0));
+      background-repeat: repeat;
+      background-size: 200px 200px;
+      animation: twinkle 5s infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 📦 Iconos interactivos - Animación de movimiento */
+    h1 i, h2 i, .collection-item i, .btn i {
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: inline-block;
+    }
+
+    h1:hover i,
+    h2:hover i {
+      animation: bounceIcon 0.6s ease;
+      color: #4dd0e1;
+    }
+
+    .collection-item:hover i {
+      animation: spinRotate 0.6s ease;
+      color: #26a69a;
+    }
+
+    .btn:hover i {
+      animation: slideOut 0.4s ease;
+      transform: translateX(-5px);
+    }
+
+    @keyframes bounceIcon {
+      0%, 100% { transform: translateY(0); }
+      25% { transform: translateY(-8px); }
+      50% { transform: translateY(0); }
+      75% { transform: translateY(-4px); }
+    }
+
+    @keyframes spinRotate {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.1); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    @keyframes slideOut {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(5px); }
+    }
+
+    /* 🎯 Cards con efecto glass y hover interactivo */
+    .glass-card {
+      background: rgba(13, 71, 161, 0.08) !important;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .glass-card:hover {
+      background: rgba(13, 71, 161, 0.15) !important;
+      border: 1px solid rgba(77, 208, 225, 0.4);
+      box-shadow: 0 12px 48px rgba(77, 208, 225, 0.2);
+      transform: translateY(-5px);
+    }
+
+    /* 🎨 Items del carrito con efectos */
+    .collection-item {
+      background-color: rgba(255, 255, 255, 0.05) !important;
+      border-color: rgba(77, 208, 225, 0.2) !important;
+      transition: all 0.4s ease;
+      border-radius: 10px;
+      margin: 8px 0;
+    }
+
+    .collection-item:hover {
+      background-color: rgba(0, 150, 136, 0.1) !important;
+      border-left: 4px solid #4dd0e1;
+      transform: translateX(8px);
+      box-shadow: inset 0 0 20px rgba(77, 208, 225, 0.1);
+    }
+
+    /* 🔘 Botones con efectos mejorados */
+    .btn {
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border-radius: 8px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .btn.teal.darken-1:hover {
+      background-color: #00897b !important;
+      box-shadow: 0 8px 24px rgba(0, 137, 123, 0.4);
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .btn.red.darken-2:hover {
+      background-color: #c62828 !important;
+      box-shadow: 0 8px 24px rgba(198, 40, 40, 0.4);
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .btn.grey.lighten-2:hover {
+      background-color: #bdbdbd !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    /* 📊 Resumen del pedido animado */
+    .striped li {
+      transition: all 0.3s ease;
+      padding: 12px 16px;
+      border-radius: 6px;
+    }
+
+    .striped li:hover {
+      background: rgba(77, 208, 225, 0.1) !important;
+      padding-left: 24px;
+    }
+
+    /* 🎨 Encabezado animado */
+    header {
+      animation: fadeInDown 0.8s ease;
+    }
+
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* 📱 Efecto de pulse para elementos importantes */
+    #total_etiqueta {
+      animation: pulseCyan 2s infinite;
+    }
+
+    @keyframes pulseCyan {
+      0%, 100% { 
+        text-shadow: 0 0 0 rgba(77, 208, 225, 0.7);
+        transform: scale(1);
+      }
+      50% { 
+        text-shadow: 0 0 20px rgba(77, 208, 225, 0.7);
+        transform: scale(1.05);
+      }
+    }
+
+    /* ✨ Contenedor del navbar y footer con gradiente */
+    #navbar-container,
+    #footer-container {
+      background: linear-gradient(90deg, rgba(26, 35, 126, 0.9), rgba(13, 71, 161, 0.9));
+      backdrop-filter: blur(10px);
+    }
+
+    /* 🎯 Rippple effect personalizado */
+    .waves-effect {
+      position: relative;
+    }
+
+    .waves-effect::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    /* 📌 Responsive adjustments */
+    @media (max-width: 600px) {
+      .glass-card {
+        border-radius: 12px;
+      }
+
+      .section {
+        padding: 0.5rem;
+      }
+    }
+  </style>
 </head>
 
 <body class="dark">
@@ -84,5 +318,130 @@
   <script src="scripts/loadComponent.js" defer></script>
   <script src="scripts/carrito.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" defer></script>
+
+  <!-- ✨ Script de interactividad de iconos -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 🎯 Efecto de seguimiento del cursor para iconos
+      const icons = document.querySelectorAll('i[class*="fas"], i[class*="far"]');
+      
+      icons.forEach(icon => {
+        icon.addEventListener('mousemove', (e) => {
+          const rect = icon.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          
+          // Limitar el movimiento a un rango pequeño
+          const moveX = (x / rect.width) * 8;
+          const moveY = (y / rect.height) * 8;
+          
+          icon.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+
+        icon.addEventListener('mouseleave', () => {
+          icon.style.transform = 'translate(0, 0)';
+        });
+      });
+
+      // 🌈 Efecto de color dinámico al pasar el ratón
+      const buttons = document.querySelectorAll('.btn');
+      buttons.forEach(btn => {
+        btn.addEventListener('mouseenter', function() {
+          const colors = ['#4dd0e1', '#26a69a', '#ff6f00', '#ab47bc'];
+          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          this.style.borderBottom = `3px solid ${randomColor}`;
+        });
+
+        btn.addEventListener('mouseleave', function() {
+          this.style.borderBottom = 'none';
+        });
+      });
+
+      // 💫 Animación de partículas al hacer clic en botones
+      buttons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const rect = this.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          // Crear partículas
+          for (let i = 0; i < 6; i++) {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.left = x + rect.left + 'px';
+            particle.style.top = y + rect.top + 'px';
+            particle.style.width = '8px';
+            particle.style.height = '8px';
+            particle.style.borderRadius = '50%';
+            particle.style.backgroundColor = '#4dd0e1';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '9999';
+            particle.style.animation = `particleExplode${i} 0.6s ease-out forwards`;
+            
+            document.body.appendChild(particle);
+
+            // Crear la animación dinámicamente
+            const angle = (i / 6) * Math.PI * 2;
+            const velocity = 100;
+            const keyframes = `
+              @keyframes particleExplode${i} {
+                to {
+                  transform: translate(${Math.cos(angle) * velocity}px, ${Math.sin(angle) * velocity}px);
+                  opacity: 0;
+                }
+              }
+            `;
+            const style = document.createElement('style');
+            style.textContent = keyframes;
+            document.head.appendChild(style);
+
+            setTimeout(() => particle.remove(), 600);
+          }
+        });
+      });
+
+      // 🎨 Efecto de ripple personalizado en cards
+      const cards = document.querySelectorAll('.glass-card');
+      cards.forEach(card => {
+        card.addEventListener('click', function(e) {
+          const ripple = document.createElement('span');
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = x + 'px';
+          ripple.style.top = y + 'px';
+          ripple.style.position = 'absolute';
+          ripple.style.borderRadius = '50%';
+          ripple.style.backgroundColor = 'rgba(77, 208, 225, 0.6)';
+          ripple.style.pointerEvents = 'none';
+          ripple.style.animation = 'rippleEffect 0.6s ease-out';
+          ripple.style.zIndex = '1';
+
+          if (!this.style.position || this.style.position === 'static') {
+            this.style.position = 'relative';
+            this.style.overflow = 'hidden';
+          }
+
+          this.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 600);
+        });
+      });
+
+      // Definir la animación de ripple
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes rippleEffect {
+          to {
+            transform: scale(4);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    });
+  </script>
 </body>
 </html>
